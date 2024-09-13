@@ -19,20 +19,20 @@ const Header = ({
       if (typeof window.ethereum !== "undefined") {
         setIsMetaMaskInstalled(true);
 
-        window.ethereum.on("accountChangged", handleAccountChanged);
+        window.ethereum.on("accountsChangged", handleAccountsChanged);
       }
 
       return () => {
         if(typeof window.ethereum !== "undefined") {
           window.ethereum.removeListener(
-            "accountChanged". handleAccountChanged
+            "accountsChanged". handleAccountsChanged
           );
         }
       };
     }, []);
 
-    const handleAccountChanged = (account) => {
-      setAccount(account(0));
+    const handleAccountsChanged = (accounts) => {
+      setAccount(accounts(0));
     };
 
     const connectMetaMask = async() => {
@@ -49,7 +49,23 @@ const Header = ({
         console.log("Metamask no está instalada");
       }
     };
-    return <div>Header</div>;
+    return {
+      <header className="site-header header--transparent ico-header">
+        <div className="header__main-wrap">
+          <div className="container mxw_1640">
+            <div className="header__main ul_li_betwen">
+              <div className="header__left ul_li">
+                <div className="header_logo">
+                  <a href="/">
+                  <img src="assets/"></img>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>;
+    };
 };
 
 export default Header;
