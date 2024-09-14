@@ -293,15 +293,15 @@ export const addtokenToMetaMask = async()=> {
       });
 
       if(wasAdded) {
-        return "Token se añadió";
+        return "Token added!";
       } else {
-        return "Token no añadido"
+        return "Token not added"
       }
     } catch (error) {
-      return "fallo añadir";
+      return "failed to add token";
     }
   } else {
-    return "MetaMask no está instalada";
+    return "MetaMask is not intalled";
   }
 };
 

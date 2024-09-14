@@ -60,7 +60,6 @@ const index = () => {
   const [details, setDetails] = useState();
 
   useEffect(()=> {
-  
     const fetchData = async () => {
       const items = await TOKEN_ICO();
       console.log(items);

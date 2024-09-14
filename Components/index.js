@@ -44,6 +44,6 @@ export{
     Owner,
     TransferCurrency,
     Donate,
-    UpdatePrice,
     UpdateAddress,
+    UpdatePrice,
 }

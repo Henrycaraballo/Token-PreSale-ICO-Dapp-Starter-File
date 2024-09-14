@@ -19,7 +19,7 @@ const Header = ({
       if (typeof window.ethereum !== "undefined") {
         setIsMetaMaskInstalled(true);
 
-        window.ethereum.on("accountsChangged", handleAccountsChanged);
+        window.ethereum.on("accountsChanged", handleAccountsChanged);
       }
 
       return () => {
@@ -46,7 +46,7 @@ const Header = ({
           console.log(error);
         } 
       } else {
-        console.log("Metamask no está instalada");
+        console.log("MetaMask is not installed");
       }
     };
     return (
@@ -57,33 +57,32 @@ const Header = ({
               <div className="header__left ul_li">
                 <div className="header_logo">
                   <a href="/">
-                  <img src="assets/img/logo/logo"></img>
+                  <img src="assets/img/logo/logompz.jpg" alt="" srcset />
                   </a>
                 </div>
               </div>
 
-              <div className="main-menu__wrap ul_li navbar navbar-expand-xl ">
-                <nav className="main-menu collapse navbar-collaps">
+              <div className="main-menu__wrap ul_li navbar navbar-expand-xl">
+                <nav className="main-menu collapse navbar-collapse">
                   <ul>
                     <li className="active has-mega-menu">
-                      <a href="/">Inicio</a>
+                      <a href="/">Home</a>
                     </li>
                     <li>
-                      <a className="scrollspy-btn" href="#about">Nosotros</a>
+                      <a className="scrollspy-btn" href="#about">About</a>
                     </li>
                     <li>
-                      <a className="scrollspy-btn" href="#roadmap">MapaRuta</a>
+                      <a className="scrollspy-btn" href="#roadmap">RoadMap</a>
                     </li>
                     <li>
-                      <a className="scrollspy-btn" href="#team">Equipo</a>
+                      <a className="scrollspy-btn" href="#team">Team</a>
                     </li>
                     <li>
                       <a className="scrollspy-btn" href="#faq">Faq</a>
                     </li>                    
                     <li>
-                      <a className="scrollspy-btn" href="#contact">Contacto</a>
+                      <a className="scrollspy-btn" href="#contact">Contact</a>
                     </li>
-
                     <li>
                       <a className="scrollspy-btn"
                         style={{
@@ -92,7 +91,7 @@ const Header = ({
                         onClick={() => ownerModel? setOwnerModel(false) : setOwnerModel(true)
                         }
                       >
-                        Herramientas
+                        Tools
                       </a>
                     </li>
                   </ul>
@@ -102,7 +101,7 @@ const Header = ({
               <div className="header__action ul_li">
                 <div className="d-xl-none">
                   <a className="header__bar hamburger_menu">
-                    <div className="header__bat-icon">
+                    <div className="header__bar-icon">
                       <span />
                       <span />
                       <span />
@@ -125,7 +124,7 @@ const Header = ({
                   </div> 
                 ) : (
                   <div className="header__account">
-                    <a onClick={() => connectMetaMask()}>Conecta Billetera</a>
+                    <a onClick={() => connectMetaMask()}>Conect Wallet</a>
                   </div>
                 )}
               </div>                            

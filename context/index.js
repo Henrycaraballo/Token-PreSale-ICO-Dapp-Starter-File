@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+import React, { useState } from "react";
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
 
@@ -24,7 +24,7 @@ export const TOKEN_ICO_Provider = ({ children }) => {
 
     const [loader, setLoader] = useState(false);
     const [account, setAccount] = useState();
-    const [count, setCount,] = useState(0);
+    const [count, setCount] = useState(0);
 
     const notifySuccess = (msg) => toast.success(msg, { duration: 2000 });
     const notifyError = (msg) => toast.error(msg, { duration: 2000 }
@@ -50,7 +50,7 @@ export const TOKEN_ICO_Provider = ({ children }) => {
                     tokenBal: ethers.utils.formatEther(tokenDetails.balance.toString()),
                     name: tokenDetails.name,
                     symbol: tokenDetails.symbol,
-                    sypply: ethers.utils.formatEther(tokenDetails.supply.toString()),
+                    supply: ethers.utils.formatEther(tokenDetails.supply.toString()),
                     tokenPrice: ethers.utils.formatEther(
                         tokenDetails.tokenPrice.toString()),
                     tokenAddr: tokenDetails.tokenAddr,
@@ -64,7 +64,7 @@ export const TOKEN_ICO_Provider = ({ children }) => {
             }
         } catch (error) {
           console.log(error);
-          notifyError("error vuelve intentar nuevamente");
+          notifyError("error try again later");
           setLoader(false);
         }
     };
@@ -76,7 +76,9 @@ export const TOKEN_ICO_Provider = ({ children }) => {
             
             if (address) {
                 const contract = await TOKEN_ICO_CONTRACT();
+                
                 const tokenDetails = await contract.getTokenDetails();
+                
                 const availableToken = ethers.utils.formatEther(
                     tokenDetails.balance.toString()
                 );
@@ -88,18 +90,18 @@ export const TOKEN_ICO_Provider = ({ children }) => {
 
                     const transaction = await contract.buyToken(Number(amount), {
                         value: payAmount.toString(),
-                        gasLimit: ethers.utils.hexlity(8000000)
+                        gasLimit: ethers.utils.hexlify(8000000)
                     });
 
                     await transaction.wait();
                     setLoader(false);
-                    notifySuccess("Transacción completada exitosamente");
+                    notifySuccess("Transaction completed successfully");
                     window.location.reload();
                 }
             }
         } catch (error) {
         console.log(error);
-        notifyError("error vuelve intentar nuevamente");
+        notifyError("error try again later");
         setLoader(false);
         }
     };
@@ -123,13 +125,13 @@ export const TOKEN_ICO_Provider = ({ children }) => {
     
                 await transaction.wait();
                 setLoader(false);
-                notifySuccess("Transacción completada exitosamente");
+                notifySuccess("Transaction completed successfully");
                 window.location.reload();
             }
         }
       } catch (error) {
       console.log(error);
-      notifyError("error vuelve intentar nuevamente");
+      notifyError("error try again later");
       setLoader(false);
       }
     };
@@ -146,7 +148,7 @@ export const TOKEN_ICO_Provider = ({ children }) => {
     
             await transaction.wait();
             setLoader(false);
-            notifySuccess("Transacción completada exitosamente");
+            notifySuccess("Transaction completed successfully");
                 window.location.reload();
           }
        } catch (error) {
@@ -169,12 +171,12 @@ export const TOKEN_ICO_Provider = ({ children }) => {
         
               await transaction.wait();
               setLoader(false);
-              notifySuccess("Transacción completada exitosamente");
+              notifySuccess("Transaction completed successfully");
                 window.location.reload();
             }
         } catch (error) {
         console.log(error);
-        notifyError("error vuelve intentar nuevamente");
+        notifyError("error try again laeter");
         setLoader(false);
         }
     };
@@ -195,12 +197,12 @@ export const TOKEN_ICO_Provider = ({ children }) => {
           
             await transaction.wait();
             setLoader(false);
-            notifySuccess("Transacción completada exitosamente");
+            notifySuccess("Transaction completed successfully");
             window.location.reload();
           }
         } catch (error) {
         console.log(error);
-        notifyError("error vuelve intentar nuevamente");
+        notifyError("error try again later");
         setLoader(false);
         }
     };
@@ -223,12 +225,12 @@ export const TOKEN_ICO_Provider = ({ children }) => {
           
             await transaction.wait();
             setLoader(false);
-            notifySuccess("Transacción completada exitosamente");
+            notifySuccess("Transaction completed successfully");
             window.location.reload();
           }
         } catch (error) {
         console.log(error);
-        notifyError("error vuelve intentar nuevamente");
+        notifyError("error try again later");
         setLoader(false);
         }
     };
@@ -247,10 +249,14 @@ export const TOKEN_ICO_Provider = ({ children }) => {
             const transaction = await contract.transfer(_sendTo, payAmount, {
                 gasLimit: ethers.utils.hexlify(8000000),
             });
+
+            await transaction.wait();
+                setLoader(false);
+                notifySuccess("Transaction completed successfully")
           }
         } catch (error) {
         console.log(error);
-        notifyError("error vuelve intentar nuevamente");
+        notifyError("error try again later");
         setLoader(false);
         }
     };
