@@ -48,14 +48,14 @@
                         m = null;
                     h = h[2], i.hasOwnProperty(h) && (m = i[h], m = Number(a[m])), null !== m && ("!" === k && (m = e(l, m)), "" === k && m < 10 && (m = "0" + m.toString()), b = b.replace(j, m.toString()))
                 }
-            return b = b.replace(/%%/, "%")
-        }
+            return b = b.replace(/%%/, "%");
+        };
     }
 
     function e(a, b) {
         var c = "s",
             d = "";
-        return a && (a = a.replace(/(:|;|\s)/gi, "").split(/\,/), 1 === a.length ? c = a[0] : (d = a[0], c = a[1])), Math.abs(b) > 1 ? c : d
+        return a && (a = a.replace(/(:|;|\s)/gi, "").split(/\,/), 1 === a.length ? c = a[0] : (d = a[0], c = a[1])), Math.abs(b) > 1 ? c : d;
     }
     var f = [],
         g = [],
@@ -142,6 +142,6 @@
                     e = b[0];
                 j.prototype.hasOwnProperty(e) ? d[e].apply(d, b.slice(1)) : null === String(e).match(/^[$A-Z_][0-9A-Z_$]*$/i) ? (d.setFinalDate.call(d, e), d.start()) : a.error("Method %s does not exist on jQuery.countdown".replace(/\%s/gi, e))
             } else new j(this, b[0], b[1])
-        })
+        });
     }
 });
