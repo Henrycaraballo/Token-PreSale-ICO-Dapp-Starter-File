@@ -118,7 +118,7 @@ const networks = {
 
   const changeNetwork = async ({ networkName }) => {
     try {
-      if(!window.ethereum) throw new Error("No se encontró billetera crypto");
+      if(!window.ethereum) throw new Error("No crypto wallet found");
       await window.ethereum.request({
         method: "wallet_addEthereumChain",
         params: [
@@ -138,25 +138,25 @@ export const handleNetworkSwitch = async () => {
 };
 
 export const CHECK_WALLET_CONNECTED = async () => {
-  if(!window.ethereum) return console.log("Favor Instalar MetaMask");
+  if(!window.ethereum) return console.log("Please install MetaMask");
   await handleNetworkSwitch();
 
-  const account = await window.ethereum.reqquest({ method: "eth_accounts" });
+  const account = await window.ethereum.request({ method: "eth_accounts" });
 
   if (account.length){
     return account(0);
   } else {
-    console.log("Favor Instalar MetaMask & Connectar, Recargar");
+    console.log("Please install MetaMask & Connect, Reload");
   }
 };
 
 
 export const CONNECT_WALLET = async () => {
   try {
-    if(!window.ethereum) return console.log("Favor Instalar MetaMask");
+    if(!window.ethereum) return console.log("Please Install MetaMask");
     await handleNetworkSwitch();
 
-    const account = await window.ethereum.reqquest({ 
+    const account = await window.ethereum.request({ 
       method: "eth_requestAccounts"
     });
 
@@ -276,10 +276,10 @@ export const addtokenToMetaMask = async()=> {
     const tokenDecimals = tokenDetails?.decimals;
     const tokenAddress = TOKEN_ADDRESS;
     const tokenSymbol = tokenDetails?.symbol;
-    const tokenImage = "";
+    const tokenImage = "https://ibb.co/album/tPpjLL";
 
     try {
-      const wasAddress = await window.ethereum.request({
+      const wasAdded = await window.ethereum.request({
         method: "wallet_watchAsset",
         params:{
           type: "ERC20",
@@ -304,7 +304,6 @@ export const addtokenToMetaMask = async()=> {
     return "MetaMask is not intalled";
   }
 };
-
 
 
   const tokenImage =

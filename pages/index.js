@@ -57,14 +57,14 @@ const index = () => {
   const [openDonate, setOpenDonate] = useState(false);
   const [openUpdatePrice, setOpenUpdatePrice] = useState(false);
   const [openUpdateAddress, setOpenUpdateAddress] = useState(false);
-  const [details, setDetails] = useState();
+  const [detail, setDetail] = useState();
 
   useEffect(()=> {
     const fetchData = async () => {
       const items = await TOKEN_ICO();
       console.log(items);
 
-      setDetails(items);
+      setDetail(items);
     };
     fetchData();
   }, [account]); 
@@ -76,7 +76,7 @@ const index = () => {
           <Owner 
             setOwnerModel={setOwnerModel}
             currency={currency} 
-            details={details}
+            detail={detail}
             account={account}
             setTransferModel={setTransferModel}
             setTransferCurrency={setTransferCurrency}
@@ -92,7 +92,7 @@ const index = () => {
             setBuyModel={setBuyModel}
             BUY_TOKEN={BUY_TOKEN}
             currency={currency}
-            details={details}
+            detail={detail}
             account={account}
             ERC20={ERC20}
             TOKEN_ADDRESS={TOKEN_ADDRESS}
@@ -114,7 +114,7 @@ const index = () => {
             <TransferCurrency
               setTransferCurrency={setTransferCurrency}
               TRANSFER_ETHER={TRANSFER_ETHER}
-              details={details}
+              detail={detail}
               currency={currency}
               CHECK_ACCOUNT_BALANCE={CHECK_ACCOUNT_BALANCE}
               setLoader={setLoader}
@@ -123,7 +123,7 @@ const index = () => {
 
           {openDonate && (
             <Donate
-              details={details}
+              detail={detail}
               currency={currency}
               setOpenDonate={setOpenDonate}
               DONATE={DONATE}
@@ -141,7 +141,7 @@ const index = () => {
 
           {openUpdateAddress && (
             <UpdateAddress
-              details={details}
+              detail={detail}
               currency={currency}
               setOpenUpdateAddress={setOpenUpdateAddress}
               UPDATE_TOKEN={UPDATE_TOKEN}
@@ -158,24 +158,27 @@ const index = () => {
             setLoader={setLoader}
             setOwnerModel={setOwnerModel}
             shortenAddress={shortenAddress}
-            details={details} 
+            detail={detail} 
             currency={currency}
             ownerModel={ownerModel}
           />
-          <SideBar />
+          <SideBar 
+            setOwnerModel={setOwnerModel} 
+            ownerModel={ownerModel}
+          />
           <Hero 
             setBuyModel={setBuyModel}
             account={account}
             CONNECT_WALLET={CONNECT_WALLET}
             setAccount={setAccount}
             setLoader={setLoader}
-            details={details}
+            detail={detail}
             addtokenToMetaMask={addtokenToMetaMask}
           />
           <About />
           <Features />
           <Token />
-          <TokenInfo details={details} />
+          <TokenInfo detail={detail} currency={currency}/>
           <Team />
           <Faq />
           <Contact />

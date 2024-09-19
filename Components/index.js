@@ -12,7 +12,7 @@ import SideBar from "./SideBar";
 import Team from "./Team";
 import Token from "./Token";
 import TokenInfo from "./TokenInfo";
-import Roadmap from "./Roadmap";
+// import Roadmap from "./Roadmap";
 
 //MODEL
 import Popup from "./Popup";
@@ -38,7 +38,7 @@ export{
     Team, 
     Token, 
     TokenInfo, 
-    Roadmap, 
+    // Roadmap, 
     Popup, 
     TransferToken,
     Owner,

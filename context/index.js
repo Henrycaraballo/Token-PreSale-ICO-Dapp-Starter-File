@@ -19,7 +19,6 @@ export const TOKEN_ICO_Context = React.createContext();
 
 export const TOKEN_ICO_Provider = ({ children }) => {
     const DAPP_NAME = "TOKEN ICO DAPP";
-    const currency = "ETH";
     const network = "Holesky";
 
     const [loader, setLoader] = useState(false);
@@ -80,13 +79,15 @@ export const TOKEN_ICO_Provider = ({ children }) => {
                 const tokenDetails = await contract.getTokenDetails();
                 
                 const availableToken = ethers.utils.formatEther(
-                    tokenDetails.balance.toString()
+                    tokenDetails.balance.toString() 
                 );
 
                 if(availableToken > 1) {
-                    const price = ethers.utils.formatEther(tokenDetails.tokenPrice.toString());
+                    const price = ethers.utils.formatEther(tokenDetails.tokenPrice.toString()) * Number(amount);
 
                     const payAmount = ethers.utils.parseUnits(price.toString(), "ether");
+
+                    console.log(payAmount);
 
                     const transaction = await contract.buyToken(Number(amount), {
                         value: payAmount.toString(),
@@ -153,7 +154,7 @@ export const TOKEN_ICO_Provider = ({ children }) => {
           }
        } catch (error) {
         console.log(error);
-        notifyError("error vuelve intentar nuevamente");
+        notifyError("error try again later");
         setLoader(false);
        }
     };
@@ -280,7 +281,7 @@ export const TOKEN_ICO_Provider = ({ children }) => {
         TOKEN_ADDRESS,
         loader,
         account,
-        currency,
+        currency: "ETH",
     }}
     >
         {children}

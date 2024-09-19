@@ -1,6 +1,6 @@
 import React from "react";
 
-const SideBar = () => {
+const SideBar = ({ setOwnerModel, ownerModel, }) => {
   return (
     <aside className="slide-bar">
       <div className="close-mobile-menu">
@@ -15,7 +15,7 @@ const SideBar = () => {
           <form action="#" role="search">
             <input type="text" placeholder="Search Keywords" />
             <button type="submit">
-              <i className="ti-searc" />
+              <i className="ti-search" />
             </button>
           </form>
         </div>
@@ -47,6 +47,19 @@ const SideBar = () => {
           <li>
             <a href="#!" className="">
               Get in touch
+            </a>
+          </li>
+          <li>
+            <a 
+              className="scrollspy-btn" 
+              style={{ 
+                cursor:"pointer",
+              }} 
+                onClick={() => 
+                  ownerModel? setOwnerModel(false) : setOwnerModel(true)
+                }
+            >
+              Tools
             </a>
           </li>
         </ul>

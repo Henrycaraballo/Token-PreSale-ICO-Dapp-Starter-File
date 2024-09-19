@@ -7,7 +7,7 @@ const Header = ({
   setLoader,
   setOwnerModel,
   shortenAddress,
-  details,
+  detail,
   currency,
   ownerModel,
 }) => {
@@ -71,9 +71,9 @@ const Header = ({
                     <li>
                       <a className="scrollspy-btn" href="#about">About</a>
                     </li>
-                    <li>
+                    {/* <li>
                       <a className="scrollspy-btn" href="#roadmap">RoadMap</a>
-                    </li>
+                    </li> */}
                     <li>
                       <a className="scrollspy-btn" href="#team">Team</a>
                     </li>
@@ -114,17 +114,17 @@ const Header = ({
                   <div className="header__acount">
                     <a 
                       onClick={() => 
-                        navigator.clipboard.writeText(details?.address)
+                        navigator.clipboard.writeText(detail?.address)
                       }
                     >
                       {shortenAddress(details?.address)}: {
-                      details?.maticBal.slice(0, 6)}
+                      detail?.maticBal.slice(0, 6)}
                       {currency}
                     </a> 
                   </div> 
                 ) : (
                   <div className="header__account">
-                    <a onClick={() => connectMetaMask()}>Conect Wallet</a>
+                    <a onClick={() => connectMetaMask()}>Connect Wallet</a>
                   </div>
                 )}
               </div>                            

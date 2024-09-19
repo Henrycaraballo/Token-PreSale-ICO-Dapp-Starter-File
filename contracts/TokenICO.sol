@@ -5,10 +5,10 @@ interface ERC20 {
     function transfer(address recipient, uint256 amount) external returns (bool);
     function balanceOf(address account) external view returns (uint256);
     function allowance(address owner, address spender) external view returns (uint256); 
-    function aporove(address spender, uint256 amount) external returns (bool);
+    function apporove(address spender, uint256 amount) external returns (bool);
     function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
     function symbol() external view returns (string memory);
-    function TotalSupply() external view  returns (uint256);
+    function totalSupply() external view  returns (uint256);
     function name() external view returns (string memory);
     
 }
@@ -20,7 +20,7 @@ contract TokenICO {
     uint256 public soldTokens;
 
     modifier onlyOwner(){
-        require(msg.sender == owner, "Solo el titular del contract puede realizar esta accion");
+        require(msg.sender == owner, "Only the owner can invoke this function");
         _;
     }
 
@@ -41,10 +41,10 @@ contract TokenICO {
     }
 
     function buyToken(uint _tokenAmount) public payable {
-        require(msg.value == multiply(_tokenAmount, tokenSalePrice), "Insufficiente ETH aportado para comprar el token");
+        require(msg.value == multiply(_tokenAmount, tokenSalePrice), "Insufficient ETH to buy this token");
 
         ERC20 token = ERC20(tokenAddress);
-        require(_tokenAmount <= token.balanceOf(address(this)), "No quedan suficientes token para la venta");
+        require(_tokenAmount <= token.balanceOf(address(this)), "Not enough token for sale");
 
          require(token.transfer(msg.sender, _tokenAmount * 1e18));
 
@@ -60,34 +60,34 @@ contract TokenICO {
             token.name(),
             token.symbol(),
             token.balanceOf(address(this)),
-            token.TotalSupply(),
+            token.totalSupply(),
             tokenSalePrice,
             tokenAddress
         );
     }
 
     function transferToOwner(uint256 _amount) external payable {
-        require(msg.value >= _amount, "Insufficient envio de fondos");
+        require(msg.value >= _amount, "Insufficient funds sent");
 
         (bool success,) = owner.call{value: _amount}("");
-        require(success, "Transferrencia fallo");
+        require(success, "Transfer failed");
     }
 
     function transferEther(address payable _receiver, uint256 _amount) external payable 
     {
-        require(msg.value >= _amount, "Insufficiente envio de fondos");
+        require(msg.value >= _amount, "Insufficient funds sent");
 
         (bool success,) = _receiver.call{value: _amount}("");
-        require(success, "Transferrencia fallo");
+        require(success, "Transferr failed");
     }
 
     function withdrawAllTokens() public onlyOwner {
         ERC20 token = ERC20(tokenAddress);
         uint256 balance = token.balanceOf(address(this));
 
-        require(balance > 0, "No tokens para retirar");
+        require(balance > 0, "No token to withdraw");
 
-        require(token.transfer(owner, balance), "Transferir titularidad");
+        require(token.transfer(owner, balance), "Transfer owner");
     }
 
 }
